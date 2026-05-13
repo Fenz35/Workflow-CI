@@ -12,7 +12,7 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error
 mlflow.set_experiment("Gaming_Academic_Performance_Basic")
 
 # Memuat Data yang sudah diproses
-data_path = "GAP_preprocessing/train_cleaned.csv"
+data_path = "train_cleaned.csv"
 if not os.path.exists(data_path):
     raise FileNotFoundError(f"Data yang sudah diproses tidak ditemukan di {data_path}")
 
