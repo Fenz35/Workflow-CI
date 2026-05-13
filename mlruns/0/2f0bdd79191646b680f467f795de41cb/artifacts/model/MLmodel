@@ -1,0 +1,43 @@
+artifact_path: model
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.12.7
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.8.0
+mlflow_version: 2.19.0
+model_size_bytes: 142346
+model_uuid: 60f09e8dc5af4f45b260deba65af405d
+run_id: 2f0bdd79191646b680f467f795de41cb
+saved_input_example_info:
+  artifact_path: input_example.json
+  pandas_orient: split
+  serving_input_path: serving_input_example.json
+  type: dataframe
+signature:
+  inputs: '[{"type": "double", "name": "num__age", "required": true}, {"type": "double",
+    "name": "num__gaming_hours", "required": true}, {"type": "double", "name": "num__study_hours",
+    "required": true}, {"type": "double", "name": "num__sleep_hours", "required":
+    true}, {"type": "double", "name": "num__attendance", "required": true}, {"type":
+    "double", "name": "num__social_activity", "required": true}, {"type": "double",
+    "name": "num__device_usage", "required": true}, {"type": "double", "name": "num__reaction_time_ms",
+    "required": true}, {"type": "double", "name": "num__addiction_score", "required":
+    true}, {"type": "double", "name": "cat__gender_Female", "required": true}, {"type":
+    "double", "name": "cat__gender_Male", "required": true}, {"type": "double", "name":
+    "cat__gender_Other", "required": true}, {"type": "double", "name": "cat__gaming_genre_Casual",
+    "required": true}, {"type": "double", "name": "cat__gaming_genre_FPS", "required":
+    true}, {"type": "double", "name": "cat__gaming_genre_RPG", "required": true},
+    {"type": "double", "name": "cat__stress_level_High", "required": true}, {"type":
+    "double", "name": "cat__stress_level_Low", "required": true}, {"type": "double",
+    "name": "cat__stress_level_Medium", "required": true}]'
+  outputs: '[{"type": "double", "required": true}]'
+  params: null
+utc_time_created: '2026-05-13 00:47:56.351735'
