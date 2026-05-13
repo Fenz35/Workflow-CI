@@ -10,20 +10,27 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
+      # Checkout Code
+      - name: Run actions/checkout@v3
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
-      - name: Set up Python
+      # Set up Python 3.12.7
+      - name: Set up Python 3.12.7
         uses: actions/setup-python@v4
         with:
           python-version: '3.12.7'
 
+      # Check environment
+      - name: Check Env
+        run: env
+
+      # Install dependencies
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install mlflow==2.19.0 pandas scikit-learn numpy
+          pip install mlflow==2.19.0 pandas scikit-learn
 
       # Menjalankan folder MLProject menggunakan local manager
       - name: Run MLflow Project
@@ -36,6 +43,21 @@ jobs:
           RUN_ID=$(ls -td mlruns/0/*/ | grep -v 'datasets' | head -n 1 | xargs basename)
           echo "RUN_ID=$RUN_ID" >> $GITHUB_ENV
           echo "Latest run_id: $RUN_ID"
+
+      # Install python dependencies 
+      - name: Install python dependencies
+        run: |
+          pip install mlflow==2.19.0 numpy pandas scikit-learn
+
+      # Upload to github (Save mlrun to the repo)
+      - name: Upload to GitHub
+        run: |
+          git config --global user.name "${{ secrets.USERNAME }}"
+          git config --global user.email "${{ secrets.EMAIL }}"
+          git add -f mlruns/
+          git commit -m "Automated: Save MLflow artifacts from CI" || true
+          git push origin main
+
 
       # Build Docker Model
       - name: Build Docker Model
@@ -61,11 +83,3 @@ jobs:
       - name: Push Docker Image
         run: |
           docker push ${{ secrets.DOCKER_HUB_USERNAME }}/workflow-ci:latest
-
-      - name: Save mlruns to repo
-        run: |
-          git config --global user.name "${{ secrets.username }}"
-          git config --global user.email "${{ secrets.email }}"
-          git add -f mlruns/
-          git commit -m "Save mlruns from CI run" || true
-          git push origin main
