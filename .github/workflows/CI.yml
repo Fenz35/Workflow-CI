@@ -40,22 +40,28 @@ jobs:
       # Mengambil RUN_ID terbaru dari folder mlruns
       - name: Get latest MLflow run_id
         run: |
-          RUN_ID=$(ls -td mlruns/0/*/ | grep -v 'datasets' | head -n 1 | xargs basename)
+          RUN_ID=$(ls -td MLProject/mlruns/0/*/ | grep -v 'datasets' | head -n 1 | xargs basename)
           echo "RUN_ID=$RUN_ID" >> $GITHUB_ENV
           echo "Latest run_id: $RUN_ID"
+
+      # Salin folder mlruns ke root agar mlflow models build-docker bisa membaca datanya
+      - name: Align Tracking Folders for Docker Build
+        run: |
+          cp -r MLProject/mlruns ./mlruns
+          echo "Folder mlruns berhasil disalin ke root workspace."
 
       # Install python dependencies 
       - name: Install python dependencies
         run: |
           pip install mlflow==2.19.0 numpy pandas scikit-learn
 
-      # Upload to github (Save mlrun to the repo)
+      # Simpan mlruns ke repo menggunakan tag safety [skip ci] agar tidak terjadi infinite loop
       - name: Upload to GitHub
         run: |
           git config --global user.name "${{ secrets.USERNAME }}"
           git config --global user.email "${{ secrets.EMAIL }}"
-          git add -f mlruns/
-          git commit -m "Automated: Save MLflow artifacts from CI" || true
+          git add -f MLProject/mlruns/
+          git commit -m "Automated: Save MLflow artifacts from CI [skip ci]" || true
           git push origin main
 
 
