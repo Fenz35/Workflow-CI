@@ -1,0 +1,15 @@
+artifact_uri: file:///home/runner/work/Workflow-CI/Workflow-CI/mlruns/0/cb0300ac00a4446393afe106e2e4344d/artifacts
+end_time: 1778715086664
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: cb0300ac00a4446393afe106e2e4344d
+run_name: vaunted-hare-173
+run_uuid: cb0300ac00a4446393afe106e2e4344d
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1778715078147
+status: 3
+tags: []
+user_id: runner
