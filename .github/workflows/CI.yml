@@ -42,24 +42,9 @@ jobs:
       # Mengambil RUN_ID terbaru dari folder mlruns
       - name: Get latest MLflow run_id
         run: |
-          # Extract the actual Run ID dynamically from anywhere in the workspace
-          RUN_ID=$(find . -name "meta.yaml" | grep "/0/" | head -n 1 | xargs dirname | xargs basename)
+          RUN_ID=$(ls -td mlruns/0/*/ | grep -v 'datasets' | head -n 1 | xargs basename)
           echo "RUN_ID=$RUN_ID" >> $GITHUB_ENV
-          echo "Discovered System Run ID: $RUN_ID"
-          
-          # Find where the actual 'model' directory was written
-          MODEL_SOURCE_PATH=$(find . -type d -name "model" | grep "$RUN_ID" | head -n 1)
-          echo "Found Model Directory Source Path at: $MODEL_SOURCE_PATH"
-          
-          # Reconstruct the clean, unified target structure at root level
-          mkdir -p mlruns/0/$RUN_ID/artifacts
-          
-          # Copy the found model folder cleanly into the correct target root structure
-          cp -r $MODEL_SOURCE_PATH mlruns/0/$RUN_ID/artifacts/
-          echo "Success: Artifacts fully mirrored to root workspace context!"
-          
-          # Print out structural layouts to workflow logs for debugging transparency
-          ls -R mlruns/
+          echo "Latest run_id: $RUN_ID"
 
       # Install python dependencies 
       - name: Install python dependencies
