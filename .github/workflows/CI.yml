@@ -42,9 +42,10 @@ jobs:
       # Mengambil RUN_ID terbaru dari folder mlruns
       - name: Get latest MLflow run_id
         run: |
-          RUN_ID=$(ls -td mlruns/0/*/ | grep -v 'datasets' | head -n 1 | xargs basename)
+          # Finds folder names inside mlruns/0/ that match a 32-character hex pattern
+          RUN_ID=$(find mlruns/0/ -maxdepth 1 -type d -regextype posix-extended -regex '.*/[a-f0-9]{32}$' | xargs basename)
           echo "RUN_ID=$RUN_ID" >> $GITHUB_ENV
-          echo "Latest run_id: $RUN_ID"
+          echo "True Active run_id parsed: $RUN_ID"
 
       # Install python dependencies 
       - name: Install python dependencies
