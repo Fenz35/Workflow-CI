@@ -32,20 +32,22 @@ jobs:
           python -m pip install --upgrade pip
           pip install mlflow==2.19.0 pandas scikit-learn
 
-      # 5. Run MLflow to write tracking files directly to the root workspace folder
+      # Run MLflow
       - name: Run MLflow Project
-        env:
-          MLFLOW_TRACKING_URI: file://${{ github.workspace }}/mlruns
         run: |
           mlflow run MLProject --experiment-name="Gaming_Academic_Performance_Basic" --env-manager=local
 
       # Get latest MLflow run_id
       - name: Get latest MLflow run_id
         run: |
-          # Use find to locate directory paths matching exactly 32 hex characters
-          RUN_ID=$(find mlruns/0/ -maxdepth 1 -type d -regextype posix-extended -regex '.*/[a-f0-9]{32}$' | xargs basename)
+          RUN_ID=$(find MLProject/mlruns/0/ -maxdepth 1 -type d -regextype posix-extended -regex '.*/[a-f0-9]{32}$' | xargs basename)
           echo "RUN_ID=$RUN_ID" >> $GITHUB_ENV
           echo "True Active run_id parsed cleanly: $RUN_ID"
+
+      - name: Align Tracking Folders for Docker Build
+        run: |
+          cp -r MLProject/mlruns ./mlruns
+          echo "Folder mlruns successfully mirrored to root workspace."
 
       # Install python dependencies 
       - name: Install python dependencies
