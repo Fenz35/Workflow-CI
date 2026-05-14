@@ -1,0 +1,15 @@
+artifact_uri: file:///home/runner/work/Workflow-CI/Workflow-CI/mlruns/0/9f4b132b2f054b96bbaa074cb51aef8a/artifacts
+end_time: 1778722904556
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 9f4b132b2f054b96bbaa074cb51aef8a
+run_name: intrigued-midge-154
+run_uuid: 9f4b132b2f054b96bbaa074cb51aef8a
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1778722893233
+status: 3
+tags: []
+user_id: runner
