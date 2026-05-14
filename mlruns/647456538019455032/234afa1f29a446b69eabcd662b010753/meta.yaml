@@ -1,0 +1,15 @@
+artifact_uri: file:///home/runner/work/Workflow-CI/Workflow-CI/mlruns/647456538019455032/234afa1f29a446b69eabcd662b010753/artifacts
+end_time: 1778718523764
+entry_point_name: ''
+experiment_id: '647456538019455032'
+lifecycle_stage: active
+run_id: 234afa1f29a446b69eabcd662b010753
+run_name: thundering-fowl-93
+run_uuid: 234afa1f29a446b69eabcd662b010753
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1778718519862
+status: 3
+tags: []
+user_id: runner

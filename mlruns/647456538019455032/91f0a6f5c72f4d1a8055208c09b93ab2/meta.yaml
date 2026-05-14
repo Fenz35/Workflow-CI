@@ -1,0 +1,15 @@
+artifact_uri: file:///home/runner/work/Workflow-CI/Workflow-CI/mlruns/647456538019455032/91f0a6f5c72f4d1a8055208c09b93ab2/artifacts
+end_time: 1778718524335
+entry_point_name: ''
+experiment_id: '647456538019455032'
+lifecycle_stage: active
+run_id: 91f0a6f5c72f4d1a8055208c09b93ab2
+run_name: marvelous-wasp-397
+run_uuid: 91f0a6f5c72f4d1a8055208c09b93ab2
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1778718515497
+status: 3
+tags: []
+user_id: runner
