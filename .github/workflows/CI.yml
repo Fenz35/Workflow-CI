@@ -32,22 +32,17 @@ jobs:
           python -m pip install --upgrade pip
           pip install mlflow==2.19.0 pandas scikit-learn
 
-      # Run MLflow
+      # Menjalankan folder MLProject menggunakan local manager
       - name: Run MLflow Project
         run: |
-          mlflow run MLProject --experiment-name="Gaming_Academic_Performance_Basic" --env-manager=local
+          mlflow run MLProject --env-manager=local
 
-      # Get latest MLflow run_id
+      # Mengambil RUN_ID terbaru dari folder mlruns di root workspace level (Your proven code!)
       - name: Get latest MLflow run_id
         run: |
-          RUN_ID=$(find MLProject/mlruns/0/ -maxdepth 1 -type d -regextype posix-extended -regex '.*/[a-f0-9]{32}$' | xargs basename)
+          RUN_ID=$(ls -td mlruns/0/*/ | grep -v 'datasets' | head -n 1 | xargs basename)
           echo "RUN_ID=$RUN_ID" >> $GITHUB_ENV
-          echo "True Active run_id parsed cleanly: $RUN_ID"
-
-      - name: Align Tracking Folders for Docker Build
-        run: |
-          cp -r MLProject/mlruns ./mlruns
-          echo "Folder mlruns successfully mirrored to root workspace."
+          echo "Latest run_id: $RUN_ID"
 
       # Install python dependencies 
       - name: Install python dependencies
