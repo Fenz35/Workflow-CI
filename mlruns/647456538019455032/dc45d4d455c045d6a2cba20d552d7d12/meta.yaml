@@ -1,0 +1,15 @@
+artifact_uri: file:///home/runner/work/Workflow-CI/Workflow-CI/mlruns/647456538019455032/dc45d4d455c045d6a2cba20d552d7d12/artifacts
+end_time: 1778719484470
+entry_point_name: ''
+experiment_id: '647456538019455032'
+lifecycle_stage: active
+run_id: dc45d4d455c045d6a2cba20d552d7d12
+run_name: incongruous-seal-143
+run_uuid: dc45d4d455c045d6a2cba20d552d7d12
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1778719480667
+status: 3
+tags: []
+user_id: runner
