@@ -32,17 +32,19 @@ jobs:
           python -m pip install --upgrade pip
           pip install mlflow==2.19.0 pandas scikit-learn
 
-      # Menjalankan MLProject dan menyimpan log terminalnya ke sebuah file teks
+      # 5. Run MLflow to write tracking files directly to the root workspace folder
       - name: Run MLflow Project
+        env:
+          MLFLOW_TRACKING_URI: file://${{ github.workspace }}/mlruns
         run: |
-          mlflow run MLProject --experiment-name="Gaming_Academic_Performance_Basic" --env-manager=local | tee mlflow_output.log
+          mlflow run MLProject --experiment-name="Gaming_Academic_Performance_Basic" --env-manager=local
 
-      # Mengekstrak RUN_ID langsung dari log teks menggunakan kata kunci 'run with ID'
+      # Get latest MLflow run_id
       - name: Get latest MLflow run_id
         run: |
-          RUN_ID=$(grep -oE "run with ID '[a-f0-9]{32}'" mlflow_output.log | head -n 1 | cut -d"'" -f2)
+          RUN_ID=$(ls -td mlruns/0/*/ | head -n 1 | cut -d'/' -f3)
           echo "RUN_ID=$RUN_ID" >> $GITHUB_ENV
-          echo "Parsed Active run_id: $RUN_ID"
+          echo "Latest run_id successfully parsed: $RUN_ID"
 
       # Install python dependencies 
       - name: Install python dependencies
