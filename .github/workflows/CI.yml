@@ -34,8 +34,10 @@ jobs:
 
       # Menjalankan folder MLProject menggunakan local manager
       - name: Run MLflow Project
+        env:
+          MLFLOW_TRACKING_URI: file://${{ github.workspace }}/mlruns
         run: |
-          mlflow run MLProject --env-manager=local
+          mlflow run MLProject --experiment-name="Gaming_Academic_Performance_Basic" --env-manager=local
 
       # Mengambil RUN_ID terbaru dari folder mlruns
       - name: Get latest MLflow run_id

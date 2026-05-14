@@ -7,10 +7,6 @@ from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_absolute_error, mean_squared_error
 
-
-# Create a new MLflow Experiment
-mlflow.set_experiment("Gaming_Academic_Performance_Basic")
-
 # Memuat Data yang sudah diproses
 data_path = "train_cleaned.csv"
 if not os.path.exists(data_path):
